@@ -158,7 +158,7 @@
     background: white !important;
     color: black !important;
   }
-  .print\\:hidden, header, footer, .noise-overlay {
+  header, footer, .noise-overlay, [class*="print:hidden"] {
     display: none !important;
   }
   .cv-page {

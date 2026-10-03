@@ -1,3 +1,9 @@
+import gdscPlatformImg from "../assets/images/gdsc_platform_preview_1790996513884.jpg";
+import cvBuilderImg from "../assets/images/cv_builder_preview_1790996524822.jpg";
+import egBankImg from "../assets/images/eg_bank_preview_1790996537670.jpg";
+import ipTrackingImg from "../assets/images/ip_tracking_preview_1790996550529.jpg";
+import healthAiImg from "../assets/images/healthai_mockup_1790309055393.jpg";
+
 export interface WorkExperience {
   id: string;
   role: string;
@@ -273,7 +279,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
         "Created responsive, accessible navigation with Angular Router guards ensuring protected track modules.",
       ],
       techStack: ["Angular 14+", "TypeScript", "RxJS", "Reactive Forms", "Routing Guards", "LocalStorage", "SCSS", "UI/UX"],
-      imagePath: "/src/assets/images/gdsc_platform_preview_1790996513884.jpg",
+      imagePath: gdscPlatformImg,
       liveDemoUrl: "https://hussien034.github.io/GDSC-Educational-Platform/",
       displayUrl: "https://hussien034.github.io/GDSC-Educational-Platform/main",
       githubUrl: "https://github.com/hussien034/GDSC-Educational-Platform",
@@ -295,7 +301,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
         "Engineered with Bootstrap and CSS3 animations (Wow.js) with print-to-PDF styles for high-fidelity export.",
       ],
       techStack: ["JavaScript (ES6+)", "DOM & BOM", "LocalStorage", "Bootstrap", "CSS3 / Animations", "PDF Export"],
-      imagePath: "/src/assets/images/cv_builder_preview_1790996524822.jpg",
+      imagePath: cvBuilderImg,
       liveDemoUrl: "https://hussien034.github.io/CV-Bulider/",
       displayUrl: "https://hussien034.github.io/CV-Bulider/",
       githubUrl: "https://github.com/hussien034/CV-Bulider",
@@ -317,7 +323,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
         "Persisted customer card inquiries and application preferences using LocalStorage.",
       ],
       techStack: ["JavaScript", "jQuery", "RegEx Validation", "LocalStorage", "Bootstrap", "Custom CSS", "Financial UI"],
-      imagePath: "/src/assets/images/eg_bank_preview_1790996537670.jpg",
+      imagePath: egBankImg,
       liveDemoUrl: "https://hussien034.github.io/EG-BANK/",
       displayUrl: "https://hussien034.github.io/EG-BANK/",
       githubUrl: "https://github.com/hussien034/EG-BANK",
@@ -339,7 +345,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
         "Mobile-first responsive dashboard layout with high-contrast telemetry metrics.",
       ],
       techStack: ["JavaScript (ES6+)", "IP Geolocation API", "Interactive Maps", "Bootstrap", "CSS3", "Async/Await"],
-      imagePath: "/src/assets/images/ip_tracking_preview_1790996550529.jpg",
+      imagePath: ipTrackingImg,
       liveDemoUrl: "https://hussien034.github.io/IP_Tracking/",
       displayUrl: "https://hussien034.github.io/IP_Tracking/",
       githubUrl: "https://github.com/hussien034/IP_Tracking",
@@ -361,7 +367,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
         "Delivered sub-100ms UI feedback with defensive error-handling for intermittent telecommunication connectivity.",
       ],
       techStack: ["React 18", "TypeScript", "Node.js", "Express", "Google Gemini AI", "Tailwind CSS", "RTL / Bilingual"],
-      imagePath: "/src/assets/images/healthai_mockup_1790309055393.jpg",
+      imagePath: healthAiImg,
       liveDemoUrl: "#healthai-demo",
       displayUrl: "https://healthai-egypt.gov.app",
       githubUrl: "https://github.com/bassemh594",
@@ -382,7 +388,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
       "Created responsive, accessible navigation with Angular Router guards ensuring protected track modules.",
     ],
     techStack: ["Angular 14+", "TypeScript", "RxJS", "Reactive Forms", "Routing Guards", "LocalStorage", "SCSS", "UI/UX"],
-    imagePath: "/src/assets/images/gdsc_platform_preview_1790996513884.jpg",
+    imagePath: gdscPlatformImg,
     liveDemoUrl: "https://hussien034.github.io/GDSC-Educational-Platform/",
     githubUrl: "https://github.com/hussien034/GDSC-Educational-Platform",
     features: [
