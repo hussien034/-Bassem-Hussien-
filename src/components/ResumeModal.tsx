@@ -19,6 +19,7 @@ interface ResumeModalProps {
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
   const [activePage, setActivePage] = useState<"both" | "1" | "2">("both");
   const [zoomScale, setZoomScale] = useState(1);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   if (!isOpen) return null;
 
@@ -26,9 +27,38 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
     window.print();
   };
 
-  const handleDownload = () => {
-    // Triggers standard print-to-PDF or clean document save
-    window.print();
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      const response = await fetch("./Bassem_Hussein_Resume.pdf");
+      if (response.ok) {
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = blobUrl;
+        a.download = "Bassem_Hussein_Frontend_Developer_Resume.pdf";
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(blobUrl);
+        document.body.removeChild(a);
+      } else {
+        const a = document.createElement("a");
+        a.href = "./Bassem_Hussein_Resume.pdf";
+        a.download = "Bassem_Hussein_Frontend_Developer_Resume.pdf";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+    } catch {
+      const a = document.createElement("a");
+      a.href = "./Bassem_Hussein_Resume.pdf";
+      a.download = "Bassem_Hussein_Frontend_Developer_Resume.pdf";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } finally {
+      setTimeout(() => setIsDownloading(false), 600);
+    }
   };
 
   return (
@@ -82,14 +112,25 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               </button>
             </div>
 
-            {/* Print / Download Button */}
+            {/* Direct File Download Button */}
             <button
               onClick={handleDownload}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 dark:bg-[#8B7FFF] dark:hover:bg-[#7a6dfa] text-white shadow-sm transition-all"
-              title="Download or Print as PDF"
+              disabled={isDownloading}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 dark:bg-[#8B7FFF] dark:hover:bg-[#7a6dfa] text-white shadow-sm transition-all disabled:opacity-75"
+              title="Download PDF directly to your computer"
             >
-              <Download className="w-3.5 h-3.5" />
-              <span>Download PDF</span>
+              <Download className={`w-3.5 h-3.5 ${isDownloading ? "animate-bounce" : ""}`} />
+              <span>{isDownloading ? "Downloading..." : "Download PDF"}</span>
+            </button>
+
+            {/* Print Button */}
+            <button
+              onClick={handlePrint}
+              className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border border-slate-300 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-slate-50 dark:hover:bg-white/10 text-slate-700 dark:text-neutral-200 transition-colors"
+              title="Print CV using browser dialog"
+            >
+              <Printer className="w-3.5 h-3.5" />
+              <span>Print</span>
             </button>
 
             <button
