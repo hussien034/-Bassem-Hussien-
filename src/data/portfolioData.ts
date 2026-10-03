@@ -73,6 +73,22 @@ export interface CommunityLeadership {
   highlights: string[];
   badge: string;
   impactMetrics: string[];
+  hasRecommendationLetter?: boolean;
+  letterPdfUrl?: string;
+}
+
+export interface GoogleRecommendationLetter {
+  title: string;
+  issuer: string;
+  date: string;
+  signerName: string;
+  signerRole: string;
+  signerEmail: string;
+  recipientOrganization: string;
+  leadName: string;
+  verifiedUrl: string;
+  pdfUrl: string;
+  quote: string;
 }
 
 export interface Certification {
@@ -113,6 +129,7 @@ export interface PortfolioData {
     location: string;
   };
   certifications: Certification[];
+  googleRecommendationLetter: GoogleRecommendationLetter;
 }
 
 export const PORTFOLIO_DATA: PortfolioData = {
@@ -425,6 +442,8 @@ export const PORTFOLIO_DATA: PortfolioData = {
       ],
       badge: "Google Developer Student Clubs",
       impactMetrics: ["1,500+ Students Reached", "15+ Workshops Hosted", "Google Solution Challenge Finalist"],
+      hasRecommendationLetter: true,
+      letterPdfUrl: "./Google_Recommendation_Letter_Bassem_Hussein.pdf",
     },
     {
       title: "Microsoft Learn Student Ambassador",
@@ -474,4 +493,17 @@ export const PORTFOLIO_DATA: PortfolioData = {
       year: "2019 – 2020",
     },
   ],
+  googleRecommendationLetter: {
+    title: "Official Google Recommendation & Confirmation Letter",
+    issuer: "Google",
+    date: "July 20th, 2022",
+    signerName: "Salim Abid",
+    signerRole: "Google Developer EcoSystem Region Lead - Middle East and North Africa",
+    signerEmail: "SalimAbid@google.com",
+    recipientOrganization: "Cairo University - Faculty of Computers and Artificial Intelligence",
+    leadName: "Basim Husain (Bassem Hussein)",
+    verifiedUrl: "https://developers.google.com/community/dsc",
+    pdfUrl: "./Google_Recommendation_Letter_Bassem_Hussein.pdf",
+    quote: "Please accept this letter to confirm that Cairo University - Faculty of Computers and Artificial Intelligence, is one of the Google Developer Students Club in our Google approved communities network. Basim Husain currently leads the GDSC.",
+  },
 };

@@ -85,9 +85,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
               Available for Full-time Roles
             </span>
             <span aria-hidden="true">·</span>
-            <span>Cairo, Egypt (Open to Relocate)</span>
+            <span>Cairo, Egypt</span>
             <span aria-hidden="true">·</span>
-            <span>Enterprise Angular & AI</span>
+            <a
+              href="#leadership"
+              className="inline-flex items-center gap-1 text-[#1a73e8] dark:text-[#4285F4] hover:underline font-semibold"
+            >
+              <span>Ex-Google DSC Lead</span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-950 text-[#1a73e8] dark:text-[#4285F4] border border-blue-200 dark:border-blue-900 font-bold">
+                Google Letter Verified
+              </span>
+            </a>
           </div>
 
           {/* Staggered 3D RotateX Name Heading */}

@@ -544,6 +544,19 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                       <span className="text-xs italic font-normal text-slate-600">Jan 2022 – Feb 2023</span>
                     </div>
                     <ul className="mt-1.5 space-y-1 text-xs text-slate-800 list-none">
+                      <li className="flex items-start gap-1.5 text-blue-900 font-medium bg-blue-50/80 p-1.5 rounded-sm border border-blue-200">
+                        <span className="font-bold select-none text-[#4285F4] leading-tight">★</span>
+                        <span>
+                          <strong>Official Google Endorsement & Recommendation Letter:</strong> Formally certified and confirmed by Salim Abid (Google Developer EcoSystem Region Lead – MENA) as the official GDSC Lead for Cairo University (Faculty of Computers & AI).{" "}
+                          <a
+                            href="./Google_Recommendation_Letter_Bassem_Hussein.pdf"
+                            download="Google_Recommendation_Letter_Bassem_Hussein.pdf"
+                            className="underline font-bold text-[#1a73e8] hover:text-blue-900"
+                          >
+                            [Download Official Google Letter PDF ↗]
+                          </a>
+                        </span>
+                      </li>
                       <li className="flex items-start gap-1.5">
                         <span className="font-bold select-none text-slate-900 leading-tight">▪</span>
                         <span>Lead the GDSC chapter at Cairo University, fostering a collaborative learning environment and promoting modern software engineering practices.</span>
