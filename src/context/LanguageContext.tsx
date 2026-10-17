@@ -324,17 +324,17 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     root.setAttribute("dir", isRTL ? "rtl" : "ltr");
     if (isRTL) {
       root.classList.add("rtl");
-      document.title = "باسم حسين | مهندس برمجيات واجهات أمامية (Angular & TypeScript)";
+      document.title = "باسم حسين | Frontend Developer | Angular | Build Scalable projects | AI Assistant";
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
-        metaDesc.setAttribute("content", "معرض الأعمال والخبرات الهندسية للمهندس باسم حسين، متخصص أنظمة وتطبيقات Angular المؤسسية و RxJS والذكاء الاصطناعي. متاح لفرص العمل الهندسية العالمية.");
+        metaDesc.setAttribute("content", "باسم حسين | Frontend Developer | Angular | Build Scalable projects | AI Assistant - مهندس برمجيات واجهات أمامية متخصص في أنظمة Angular وتطبيقات الذكاء الاصطناعي القابلة للتوسع.");
       }
     } else {
       root.classList.remove("rtl");
-      document.title = "Bassem Hussein | Frontend Software Engineer Portfolio | باسم حسين";
+      document.title = "Bassem Hussein | Frontend Developer | Angular | Build Scalable projects | AI Assistant";
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
-        metaDesc.setAttribute("content", "Award-winning personal portfolio of Bassem Hussein (باسم حسين), Senior Frontend Software Engineer specializing in Angular, TypeScript, RxJS, and Enterprise Architecture. Open to global opportunities.");
+        metaDesc.setAttribute("content", "Frontend Developer | Angular | Build Scalable projects | AI Assistant");
       }
     }
     localStorage.setItem("bassem_portfolio_lang", language);
