@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
+import { SignatureLogo } from "./SignatureLogo";
 import {
   X,
   Printer,
@@ -17,6 +19,7 @@ interface ResumeModalProps {
 }
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
+  const { language, t } = useLanguage();
   const [activePage, setActivePage] = useState<"both" | "1" | "2">("both");
   const [zoomScale, setZoomScale] = useState(1);
   const [isDownloading, setIsDownloading] = useState(false);
@@ -69,10 +72,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 dark:bg-[#8B7FFF]" />
             <h2 className="text-xs sm:text-sm font-bold tracking-tight text-slate-900 dark:text-white font-heading">
-              Official Resume / CV — Bassem Hussein
+              {language === "ar" ? "السيرة الذاتية الرسمية — باسم حسين" : "Official Resume / CV — Bassem Hussein"}
             </h2>
             <span className="hidden md:inline text-xs font-mono text-slate-500 dark:text-neutral-400">
-              (2 Pages · Updated 2026)
+              {language === "ar" ? "(صفحتان · تحديث 2026)" : "(2 Pages · Updated 2026)"}
             </span>
           </div>
 
@@ -88,7 +91,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                     : "text-slate-600 dark:text-neutral-400 hover:text-slate-900"
                 }`}
               >
-                All Pages
+                {language === "ar" ? "كافة الصفحات" : "All Pages"}
               </button>
               <button
                 onClick={() => setActivePage("1")}
@@ -98,7 +101,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                     : "text-slate-600 dark:text-neutral-400 hover:text-slate-900"
                 }`}
               >
-                Page 1
+                {language === "ar" ? "صفحة 1" : "Page 1"}
               </button>
               <button
                 onClick={() => setActivePage("2")}
@@ -108,7 +111,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                     : "text-slate-600 dark:text-neutral-400 hover:text-slate-900"
                 }`}
               >
-                Page 2
+                {language === "ar" ? "صفحة 2" : "Page 2"}
               </button>
             </div>
 
@@ -637,9 +640,27 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                 </div>
               </div>
 
+              {/* Official Sign-off Signature Seal */}
+              <div className="mt-6 pt-3 border-t border-slate-300 flex items-center justify-between text-xs text-slate-600">
+                <div className="flex flex-col">
+                  <span className="font-semibold text-black">
+                    {language === "ar" ? "المهندس / باسم حسين" : "Bassem Hussein"}
+                  </span>
+                  <span className="text-[10px] text-slate-500">
+                    {language === "ar" ? "مهندس برمجيات واجهات أمامية" : "Frontend Software Engineer"}
+                  </span>
+                </div>
+                <div className="flex flex-col items-end">
+                  <SignatureLogo language={language} variant="stamp" animated={false} />
+                  <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider">
+                    {language === "ar" ? "توقيع معتمد" : "Official Signature"}
+                  </span>
+                </div>
+              </div>
+
               {/* Page Number 2 */}
               <div className="mt-8 pt-4 border-t border-slate-200 text-center text-[11px] text-slate-400 print:hidden">
-                Page 2 of 2
+                {language === "ar" ? "صفحة 2 من 2" : "Page 2 of 2"}
               </div>
             </div>
           )}
@@ -649,7 +670,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
         <div className="px-6 py-3 border-t border-slate-200 dark:border-white/10 bg-white dark:bg-[#151520] flex items-center justify-between text-xs text-slate-600 dark:text-neutral-400 print:hidden">
           <div className="flex items-center gap-1.5">
             <FileCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span>Exact match with Bassem Hussein's official PDF CV</span>
+            <span>{t("exactMatchCV")}</span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -658,13 +679,13 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-neutral-900 text-slate-800 dark:text-white hover:bg-slate-100 font-medium"
             >
               <Printer className="w-3.5 h-3.5" />
-              <span>Print Document</span>
+              <span>{t("printDoc")}</span>
             </button>
             <button
               onClick={onClose}
               className="px-4 py-1.5 rounded-lg bg-slate-200 dark:bg-neutral-800 text-slate-800 dark:text-white hover:bg-slate-300 font-medium"
             >
-              Close
+              {t("closeModal")}
             </button>
           </div>
         </div>

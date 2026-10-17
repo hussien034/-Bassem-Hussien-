@@ -1,11 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "dark" | "light";
+export type Theme = "dark" | "light";
+export type AccentColor = "cobalt" | "angular" | "emerald";
 
 interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
   setTheme: (theme: Theme) => void;
+  accent: AccentColor;
+  setAccent: (accent: AccentColor) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -22,6 +25,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return "dark";
   });
 
+  const [accent, setAccentState] = useState<AccentColor>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("bassem_portfolio_accent") as AccentColor | null;
+      if (saved === "cobalt" || saved === "angular" || saved === "emerald") return saved;
+    }
+    return "cobalt";
+  });
+
   useEffect(() => {
     const root = document.documentElement;
     if (theme === "dark") {
@@ -36,6 +47,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("bassem_portfolio_theme", theme);
   }, [theme]);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    root.setAttribute("data-accent", accent);
+    localStorage.setItem("bassem_portfolio_accent", accent);
+  }, [accent]);
+
   const toggleTheme = () => {
     setThemeState((prev) => (prev === "dark" ? "light" : "dark"));
   };
@@ -44,8 +61,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setThemeState(newTheme);
   };
 
+  const setAccent = (newAccent: AccentColor) => {
+    setAccentState(newAccent);
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme, accent, setAccent }}>
       {children}
     </ThemeContext.Provider>
   );

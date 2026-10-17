@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
+import { LanguageProvider } from "./context/LanguageContext";
 import { CustomCursor } from "./components/CustomCursor";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
@@ -18,9 +19,10 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-300 relative selection:bg-[#8B7FFF]/30 selection:text-[#00E5FF]">
-        {/* Custom cursor with trailing physics */}
-        <CustomCursor />
+      <LanguageProvider>
+        <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-300 relative selection:bg-blue-500/25 selection:text-blue-500">
+          {/* Custom cursor with trailing physics */}
+          <CustomCursor />
 
           {/* Strict 3-Zone Top Bar Contract Navbar */}
           <Navbar onOpenResume={() => setIsResumeModalOpen(true)} />
@@ -35,49 +37,49 @@ export default function App() {
               <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
             </div>
 
-            {/* 2. About Section & Live Interactive Angular Architecture Sandbox */}
+            {/* 1. About Section & Live Interactive Angular Architecture Sandbox */}
             <AboutSection />
 
             <div className="max-w-7xl mx-auto px-5 sm:px-8">
               <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
             </div>
 
-            {/* 3. Work Experience Interactive Timeline */}
+            {/* 2. Work Experience Interactive Timeline */}
             <ExperienceTimeline />
 
             <div className="max-w-7xl mx-auto px-5 sm:px-8">
               <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
             </div>
 
-            {/* 4. Technical Skills 3D Grid */}
-            <SkillsSection />
-
-            <div className="max-w-7xl mx-auto px-5 sm:px-8">
-              <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
-            </div>
-
-            {/* 5. Featured Project Showcase (HealthAI Egypt & Live Triage Simulator) */}
-            <FeaturedProjectSection />
-
-            <div className="max-w-7xl mx-auto px-5 sm:px-8">
-              <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
-            </div>
-
-            {/* 6. Leadership & Community (GDSC & Microsoft) */}
+            {/* 3. Leadership & Community (GDSC & Microsoft) */}
             <LeadershipSection />
 
             <div className="max-w-7xl mx-auto px-5 sm:px-8">
               <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
             </div>
 
-            {/* 7. Education & Certifications */}
+            {/* 4. Featured Project Showcase (HealthAI Egypt & Live Triage Simulator) */}
+            <FeaturedProjectSection />
+
+            <div className="max-w-7xl mx-auto px-5 sm:px-8">
+              <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
+            </div>
+
+            {/* 5. Technical Skills 3D Grid */}
+            <SkillsSection />
+
+            <div className="max-w-7xl mx-auto px-5 sm:px-8">
+              <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
+            </div>
+
+            {/* 6. Education & Certifications */}
             <EducationSection />
 
             <div className="max-w-7xl mx-auto px-5 sm:px-8">
               <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
             </div>
 
-            {/* 8. Contact Section & Direct Form */}
+            {/* 7. Contact Section & Direct Form */}
             <ContactSection />
           </main>
 
@@ -90,6 +92,7 @@ export default function App() {
             onClose={() => setIsResumeModalOpen(false)}
           />
         </div>
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

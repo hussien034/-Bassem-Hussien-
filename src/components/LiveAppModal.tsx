@@ -12,6 +12,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { ProjectItem } from "../data/portfolioData";
+import { useLanguage } from "../context/LanguageContext";
 
 interface LiveAppModalProps {
   project: ProjectItem | null;
@@ -24,11 +25,16 @@ export const LiveAppModal: React.FC<LiveAppModalProps> = ({
   isOpen,
   onClose,
 }) => {
+  const { language, t } = useLanguage();
   const [viewport, setViewport] = useState<"desktop" | "tablet" | "mobile">("desktop");
   const [iframeKey, setIframeKey] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   if (!isOpen || !project) return null;
+
+  const isAr = language === "ar";
+  const projectTitle = isAr && project.titleAr ? project.titleAr : project.title;
+  const projectBadge = isAr && project.badgeAr ? project.badgeAr : (project.badge || "Live Interactive App");
 
   const handleReload = () => {
     setIsLoading(true);
@@ -62,16 +68,16 @@ export const LiveAppModal: React.FC<LiveAppModalProps> = ({
             <div className="flex items-center gap-2">
               <span className="w-2 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
               <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white font-heading truncate max-w-[130px] sm:max-w-xs">
-                {project.title}
+                {projectTitle}
               </h3>
               <span className="hidden md:inline px-2 py-0.5 text-[10px] font-mono font-semibold rounded-full bg-indigo-50 dark:bg-[#8B7FFF]/10 text-indigo-700 dark:text-[#8B7FFF] border border-indigo-200 dark:border-[#8B7FFF]/20">
-                {project.badge || "Live Interactive App"}
+                {projectBadge}
               </span>
             </div>
           </div>
 
           {/* Center: Simulated Address Bar */}
-          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono text-slate-600 dark:text-neutral-300 max-w-md w-full truncate">
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono text-slate-600 dark:text-neutral-300 max-w-md w-full truncate" dir="ltr">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <span className="truncate select-all">{project.displayUrl || project.liveDemoUrl}</span>
           </div>
@@ -82,7 +88,7 @@ export const LiveAppModal: React.FC<LiveAppModalProps> = ({
             <div className="hidden sm:flex items-center p-0.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10">
               <button
                 onClick={() => setViewport("desktop")}
-                title="Desktop View (100%)"
+                title={isAr ? "عرض كمبيوتر مكتبي (100%)" : "Desktop View (100%)"}
                 className={`p-1.5 rounded-md transition-colors ${
                   viewport === "desktop"
                     ? "bg-white dark:bg-white/15 text-slate-900 dark:text-white shadow-2xs"
@@ -93,7 +99,7 @@ export const LiveAppModal: React.FC<LiveAppModalProps> = ({
               </button>
               <button
                 onClick={() => setViewport("tablet")}
-                title="Tablet View (768px)"
+                title={isAr ? "عرض جهاز لوحي (768px)" : "Tablet View (768px)"}
                 className={`p-1.5 rounded-md transition-colors ${
                   viewport === "tablet"
                     ? "bg-white dark:bg-white/15 text-slate-900 dark:text-white shadow-2xs"
@@ -104,7 +110,7 @@ export const LiveAppModal: React.FC<LiveAppModalProps> = ({
               </button>
               <button
                 onClick={() => setViewport("mobile")}
-                title="Mobile View (390px)"
+                title={isAr ? "عرض هاتف جوال (390px)" : "Mobile View (390px)"}
                 className={`p-1.5 rounded-md transition-colors ${
                   viewport === "mobile"
                     ? "bg-white dark:bg-white/15 text-slate-900 dark:text-white shadow-2xs"
@@ -118,38 +124,27 @@ export const LiveAppModal: React.FC<LiveAppModalProps> = ({
             {/* Reload iframe */}
             <button
               onClick={handleReload}
-              title="Reload Live App"
+              title={isAr ? "إعادة تحميل الإطار" : "Reload live application frame"}
               className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10"
             >
               <RotateCw className="w-4 h-4" />
             </button>
 
-            {/* Direct Open in New Tab */}
+            {/* Open in new tab */}
             <a
               href={project.displayUrl || project.liveDemoUrl}
               target="_blank"
               rel="noreferrer"
-              title="Open in new browser tab"
-              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 dark:bg-[#8B7FFF] dark:hover:bg-[#796bf0] text-white shadow-xs transition-colors"
-            >
-              <span className="hidden sm:inline">Open Tab</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-
-            {/* GitHub Link */}
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              title="View Repository on GitHub"
+              title={isAr ? "فتح في نافذة جديدة" : "Open in new browser tab"}
               className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10"
             >
-              <Github className="w-4 h-4" />
+              <ExternalLink className="w-4 h-4" />
             </a>
 
             {/* Close Modal */}
             <button
               onClick={onClose}
+              aria-label="Close"
               className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 ml-1"
             >
               <X className="w-5 h-5" />
@@ -163,7 +158,7 @@ export const LiveAppModal: React.FC<LiveAppModalProps> = ({
             <div className="absolute inset-0 z-20 bg-slate-950 flex flex-col items-center justify-center gap-3 text-white">
               <div className="w-8 h-8 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />
               <p className="text-xs font-mono text-slate-400">
-                Loading live application from GitHub Pages...
+                {isAr ? "جاري تحميل التطبيق الحي من GitHub Pages..." : "Loading live application from GitHub Pages..."}
               </p>
             </div>
           )}
@@ -174,7 +169,7 @@ export const LiveAppModal: React.FC<LiveAppModalProps> = ({
             <iframe
               key={iframeKey}
               src={project.liveDemoUrl}
-              title={project.title}
+              title={projectTitle}
               onLoad={() => setIsLoading(false)}
               className="w-full h-full border-0"
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
@@ -186,10 +181,14 @@ export const LiveAppModal: React.FC<LiveAppModalProps> = ({
         <div className="px-4 py-2.5 border-t border-slate-200 dark:border-white/10 bg-white dark:bg-[#151520] flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 dark:text-neutral-400 shrink-0">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span>Interactive live instance running inside secure sandbox container</span>
+            <span>
+              {isAr
+                ? "جلسة تشغيل حية مباشرة داخل حاوية معزولة وآمنة"
+                : "Interactive live instance running inside secure sandbox container"}
+            </span>
           </div>
 
-          <div className="flex items-center gap-2 font-mono text-[11px]">
+          <div className="flex items-center gap-2 font-mono text-[11px]" dir="ltr">
             <span>Tech:</span>
             <span className="text-indigo-600 dark:text-[#8B7FFF] font-semibold">
               {project.techStack.slice(0, 4).join(" · ")}
