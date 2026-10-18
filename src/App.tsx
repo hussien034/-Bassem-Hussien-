@@ -88,7 +88,7 @@ export default function App() {
               <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
             </div>
 
-            {/* 7. Custom Systems & Market-Competitive Pricing Calculator */}
+            {/* 7. Custom Systems & Intelligent Architecture Solutions */}
             <CustomSystemsPricingSection />
 
             <div className="max-w-7xl mx-auto px-5 sm:px-8">
