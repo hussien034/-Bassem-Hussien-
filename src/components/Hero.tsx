@@ -305,6 +305,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
                   >
                     Metrics
                   </button>
+                  <a
+                    href="#workspace"
+                    className="px-2 py-0.5 text-[10px] rounded transition-colors text-cyan-400 hover:text-cyan-200 flex items-center gap-1 border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20"
+                    title={language === "ar" ? "معاينة بيئة العمل الحقيقية" : "Inspect Authentic Dev Rig"}
+                  >
+                    <span>🖥️ {language === "ar" ? "بيئة العمل" : "Rig"}</span>
+                  </a>
                 </div>
               </div>
 

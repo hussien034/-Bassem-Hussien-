@@ -21,6 +21,8 @@ import {
   Clock,
 } from "lucide-react";
 
+import { sendContactEmail, EmailSendResult } from "../utils/emailService";
+
 export const ContactSection: React.FC = () => {
   const { personalInfo } = PORTFOLIO_DATA;
   const { language, t } = useLanguage();
@@ -37,6 +39,7 @@ export const ContactSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [deliveryStatus, setDeliveryStatus] = useState<string | null>(null);
+  const [activeProvider, setActiveProvider] = useState<EmailSendResult["provider"] | null>(null);
 
   const cleanPhone = personalInfo.phone.replace(/[\s+]/g, "");
 
@@ -50,6 +53,18 @@ export const ContactSection: React.FC = () => {
     navigator.clipboard.writeText(personalInfo.phone);
     setCopiedPhone(true);
     setTimeout(() => setCopiedPhone(false), 2500);
+  };
+
+  // Quick Test Data filler for effortless testing
+  const fillTestData = () => {
+    setFormData({
+      name: isAr ? "م. كريم الشناوي (Tech Lead)" : "Alex Turner (Engineering Lead)",
+      email: "recruiter.alex@company.tech",
+      subject: isAr ? "فرصة عمل كمهندس واجهات أمامية (Full-Time)" : "Full-Time Frontend Engineer Role",
+      message: isAr
+        ? "مرحباً باسم، تفقدنا معرض أعمالك المتميز وخبرتك في معمارية Angular والذكاء الاصطناعي، ونرغب في تحديد مقابلة تقنية لمنصب Senior Frontend Developer."
+        : "Hi Bassem, we reviewed your impressive Angular portfolio and AI systems. We'd love to schedule an interview for our Senior Frontend Engineer position.",
+    });
   };
 
   // WhatsApp Pre-filled message generator
@@ -69,50 +84,31 @@ export const ContactSection: React.FC = () => {
     return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(personalInfo.email)}&su=${su}&body=${body}`;
   };
 
-  // Direct Form Handler with guaranteed multi-path delivery
+  // Direct Form Handler with guaranteed @emailjs/browser + multi-path delivery
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setDeliveryStatus(null);
+    setActiveProvider(null);
 
     try {
-      // Direct Web3Forms submission to guaranteed Bassem's inbox
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: "078a6358-1f1f-4cb1-97b7-567fbf7dd78f", // Direct portfolio mail channel
-          from_name: formData.name || "Portfolio Inquirer",
+      const result = await sendContactEmail(
+        {
           name: formData.name,
           email: formData.email,
-          subject: `[Portfolio Hiring] ${formData.subject} - from ${formData.name}`,
+          subject: formData.subject,
           message: formData.message,
-          to_email: personalInfo.email,
-        }),
-      });
+          recipientEmail: personalInfo.email,
+        },
+        isAr
+      );
 
-      if (response.ok) {
-        setSubmitSuccess(true);
-        setDeliveryStatus(
-          isAr
-            ? "تم إرسال رسالتك بنجاح وسيتلقاها باسم حسين فوراً على بريده الإلكتروني!"
-            : "Your message has been delivered directly to Bassem Hussein's inbox!"
-        );
-      } else {
-        // Fallback: trigger direct mailto/Gmail
-        setSubmitSuccess(true);
-        setDeliveryStatus(
-          isAr
-            ? "تم تسجيل الرسالة! يمكنك أيضاً إرسالها بنقرة واحدة عبر Gmail أو WhatsApp لضمان الوصول اللحظي."
-            : "Message drafted! You can also click below to dispatch instantly via Gmail or WhatsApp."
-        );
-      }
-    } catch {
-      // Network fallback
+      setSubmitSuccess(result.success);
+      setDeliveryStatus(result.message);
+      setActiveProvider(result.provider);
+    } catch (err: any) {
       setSubmitSuccess(true);
+      setActiveProvider("client_fallback");
       setDeliveryStatus(
         isAr
           ? "تم تجهيز الرسالة بنجاح! يمكنك الآن إرسالها فوراً بضغطة زر عبر WhatsApp أو Gmail."
@@ -357,9 +353,21 @@ export const ContactSection: React.FC = () => {
                 </p>
               </div>
 
-              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/40 text-[11px] font-mono text-blue-600 dark:text-blue-400 font-semibold">
-                <Clock className="w-3 h-3" />
-                <span>{isAr ? "رد خلال ساعات" : "< 12h Response"}</span>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={fillTestData}
+                  title={isAr ? "ملء بيانات تجريبية سريعة لاختبار الإرسال" : "Fill test recruiter data to test form"}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/40 border border-blue-200 dark:border-blue-800/40 transition-colors"
+                >
+                  <Sparkles className="w-3 h-3 text-blue-500" />
+                  <span>{isAr ? "تجربة سريعة (Test)" : "Quick Test Fill"}</span>
+                </button>
+
+                <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/40 text-[11px] font-mono text-blue-600 dark:text-blue-400 font-semibold">
+                  <Clock className="w-3 h-3" />
+                  <span>{isAr ? "رد خلال ساعات" : "< 12h Response"}</span>
+                </div>
               </div>
             </div>
 
@@ -491,9 +499,20 @@ export const ContactSection: React.FC = () => {
               {/* Submission Result Banner */}
               {submitSuccess && (
                 <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-800 dark:text-emerald-300 text-xs font-mono space-y-2 animate-in fade-in">
-                  <div className="flex items-center gap-2 font-bold text-sm text-emerald-700 dark:text-emerald-400">
-                    <Check className="w-4 h-4" />
-                    <span>{deliveryStatus}</span>
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <div className="flex items-center gap-2 font-bold text-sm text-emerald-700 dark:text-emerald-400">
+                      <Check className="w-4 h-4" />
+                      <span>{deliveryStatus}</span>
+                    </div>
+                    {activeProvider && (
+                      <span className="shrink-0 px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                        {activeProvider === "emailjs"
+                          ? "✓ Powered by @emailjs/browser"
+                          : activeProvider === "web3forms"
+                          ? "✓ Direct Email Gateway"
+                          : "✓ Direct Link Dispatch"}
+                      </span>
+                    )}
                   </div>
 
                   <p className="text-[11px] text-emerald-700/80 dark:text-emerald-400/80">

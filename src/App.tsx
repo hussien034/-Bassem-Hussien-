@@ -5,6 +5,7 @@ import { CustomCursor } from "./components/CustomCursor";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { AboutSection } from "./components/AboutSection";
+import { WorkspaceSection } from "./components/WorkspaceSection";
 import { ExperienceTimeline } from "./components/ExperienceTimeline";
 import { SkillsSection } from "./components/SkillsSection";
 import { FeaturedProjectSection } from "./components/FeaturedProjectSection";
@@ -39,6 +40,13 @@ export default function App() {
 
             {/* 1. About Section & Live Interactive Angular Architecture Sandbox */}
             <AboutSection />
+
+            <div className="max-w-7xl mx-auto px-5 sm:px-8">
+              <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
+            </div>
+
+            {/* Interactive Engineering Battle Station / Dev Desk Setup */}
+            <WorkspaceSection />
 
             <div className="max-w-7xl mx-auto px-5 sm:px-8">
               <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
