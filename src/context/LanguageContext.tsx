@@ -156,6 +156,22 @@ const translations: Record<Language, Record<string, string>> = {
     googleLetterTitle: "Official Google Recommendation & Confirmation Letter",
     issuedByGoogle: "Issued by Google Developer Ecosystem",
     verifyCommunity: "Verified on Google Community Directory",
+
+    // Custom Systems & Pricing
+    navSystems: "Systems & Pricing",
+    systemsKicker: "Custom Systems & Competitive Pricing",
+    systemsTitle: "Full-Stack & AI Systems Built with Enterprise Precision at Accessible Rates",
+    systemsDesc: "From custom SaaS platforms and full-stack enterprise portals to integrated AI agents and workflows — get enterprise-grade software engineered without exorbitant agency price tags.",
+    marketComparison: "Compared to traditional agency quotes of $3,500–$10,000+, my direct engineering model saves you 50% to 70% while guaranteeing rapid delivery and clean code.",
+    estimatorTitle: "Interactive Project Scope & Cost Estimator",
+    chooseSystemType: "Choose System Architecture:",
+    selectFeatures: "Select Features & Integrations:",
+    estimatedBudget: "Estimated Investment Range",
+    marketRateLabel: "Traditional Market Average",
+    savingsLabel: "Your Savings with Bassem",
+    turnaroundTime: "Estimated Delivery Timeline",
+    requestThisQuote: "Request Instant WhatsApp Quote",
+    composeGmailQuote: "Request via Direct Gmail",
   },
   ar: {
     // Nav
@@ -302,6 +318,22 @@ const translations: Record<Language, Record<string, string>> = {
     googleLetterTitle: "خطاب التوصية والتأكيد الرسمي من شركة Google",
     issuedByGoogle: "صادر من منظومة مطوري جوجل الإقليمية",
     verifyCommunity: "موثق في دليل مجتمعات Google للمطورين",
+
+    // Custom Systems & Pricing
+    navSystems: "الأنظمة والأسعار",
+    systemsKicker: "بناء الأنظمة المخصصة والأسعار التنافسية",
+    systemsTitle: "بناء أي نظام متكامل (Full-Stack & AI) بجودة مؤسسية وأسعار موفرة مقارنة بالسوق",
+    systemsDesc: "سواء كنت تحتاج منصة SaaS متكاملة، نظام إداري ضخم، أو أدوات ذكاء اصطناعي وأتمتة؛ أقدم لك معمارية برمجية متينة وموثوقة بدون تكاليف الشركات الباهظة.",
+    marketComparison: "مقارنة بأسعار السوق والشركات البرمجية ($3,000 إلى $10,000+)، أوفر لك وفراً حقيقياً يتراوح بين 50% إلى 70% مع تواصل هندسي مباشر وتسليم ملتزم في الموعد.",
+    estimatorTitle: "حاسبة تقدير تكلفة وبناء الأنظمة المخصصة",
+    chooseSystemType: "اختر نوع النظام البرمجي:",
+    selectFeatures: "اختر الميزات والإضافات التقنية:",
+    estimatedBudget: "الاستثمار التقديري الموفر",
+    marketRateLabel: "متوسط سعر السوق المعتاد",
+    savingsLabel: "نسبة التوفير مقارنة بالسوق",
+    turnaroundTime: "المدة الزمنية المتوقعة للتسليم",
+    requestThisQuote: "طلب عرض سعر فوري عبر واتساب",
+    composeGmailQuote: "طلب النظام عبر Gmail المباشر",
   },
 };
 

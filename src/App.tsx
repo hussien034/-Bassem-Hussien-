@@ -11,6 +11,7 @@ import { SkillsSection } from "./components/SkillsSection";
 import { FeaturedProjectSection } from "./components/FeaturedProjectSection";
 import { LeadershipSection } from "./components/LeadershipSection";
 import { EducationSection } from "./components/EducationSection";
+import { CustomSystemsPricingSection } from "./components/CustomSystemsPricingSection";
 import { ContactSection } from "./components/ContactSection";
 import { Footer } from "./components/Footer";
 import { ResumeModal } from "./components/ResumeModal";
@@ -87,7 +88,14 @@ export default function App() {
               <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
             </div>
 
-            {/* 7. Contact Section & Direct Form */}
+            {/* 7. Custom Systems & Market-Competitive Pricing Calculator */}
+            <CustomSystemsPricingSection />
+
+            <div className="max-w-7xl mx-auto px-5 sm:px-8">
+              <div className="h-px w-full bg-neutral-200/80 dark:bg-white/[0.06]" />
+            </div>
+
+            {/* 8. Contact Section & Direct Form */}
             <ContactSection />
           </main>
 

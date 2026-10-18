@@ -28,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
     { label: t("navExperience"), href: "#experience" },
     { label: t("navLeadership"), href: "#leadership" },
     { label: t("navProjects"), href: "#featured" },
-    { label: t("navSkills"), href: "#skills" },
+    { label: t("navSystems"), href: "#systems" },
     { label: t("navContact"), href: "#contact" },
   ];
 
